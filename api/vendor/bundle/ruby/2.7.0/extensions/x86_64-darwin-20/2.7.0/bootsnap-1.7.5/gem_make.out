@@ -1,0 +1,15 @@
+current directory: /Users/apple/devise_test/api/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.5/ext/bootsnap
+/Users/apple/.rbenv/versions/2.7.1/bin/ruby -I /Users/apple/.rbenv/versions/2.7.1/lib/ruby/2.7.0 -r ./siteconf20210601-13753-55zali.rb extconf.rb
+creating Makefile
+
+current directory: /Users/apple/devise_test/api/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.5/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/apple/devise_test/api/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.5/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/apple/devise_test/api/vendor/bundle/ruby/2.7.0/gems/bootsnap-1.7.5/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20210601-13753-1p9s6jz/bootsnap
