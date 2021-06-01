@@ -5,3 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+10.times do |number|
+  user = User.first
+  user.posts.create!(
+    title: "こんにちは#{number}",
+    caption: "これはテスト#{number}の説明です",
+    date: Date.today.days_ago(number)
+  )
+end
+
+
+
+
+
+
+
