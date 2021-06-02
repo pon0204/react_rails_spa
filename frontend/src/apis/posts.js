@@ -1,10 +1,14 @@
 import axios from 'axios';
-import { postsIndex } from '../urls/index'
+import { postsIndexUrl,postsCreateUrl } from '../urls/index'
 
 export const fetchPosts = () => {
-  return axios.get(postsIndex)
+  return axios.get(postsIndexUrl)
   .then(res => {
     return res.data
   })
   .catch((e) => console.error(e))
+}
+
+export const createPosts = (data) => {
+  return axios.post(postsCreateUrl,data)
 }

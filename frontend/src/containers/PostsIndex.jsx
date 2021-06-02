@@ -1,12 +1,15 @@
-import React, { Fragment, useReducer, useEffect } from 'react';
+
+
+import React, { Fragment, useReducer, useEffect,useState } from 'react';
 import styled from "styled-components";
+
 
 // --- ここから追加 ---
 import { Link } from "react-router-dom";
 // --- ここまで追加 ---
 
 // apis
-import { fetchPosts } from '../apis/posts';
+import { fetchPosts,createPosts } from '../apis/posts';
 
 // reducers
 import {
@@ -67,6 +70,7 @@ const SubText = styled.p`
 // --- ここまで追加 ---
 
 export const Posts = () => {
+
   const [state, dispatch] = useReducer(postsReducer, initialState);
 
   useEffect(() => {
@@ -81,13 +85,10 @@ export const Posts = () => {
       })
       )
     }, [])
-    
-    console.log(state);
-
+  
   return (
     <Fragment>
       <HeaderWrapper>
-
       </HeaderWrapper>
       <MainCoverImageWrapper>
 
@@ -102,10 +103,13 @@ export const Posts = () => {
               // <Link to={`/posts/${item.id}/foods`} key={index} style={{ textDecoration: 'none' }}>
                 <postsContentWrapper>
                   <MainText>{item.title}</MainText>
+                  <MainText>{item.id}</MainText>
                 </postsContentWrapper>
               // </Link>
             )
         }
+        
+
       </postsContentsList>
     </Fragment>
   )

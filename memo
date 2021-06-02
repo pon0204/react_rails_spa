@@ -1,0 +1,14 @@
+
+ポスト処理実装の流れ
+
+クリックしたら、特定の値が更新される処理を作る
+
+axios.post
+~~~が最後に実行される
+
+usereducerでtypeを送信
+typeがtrueならaxiospostが流れる
+
+----------------------------
+inputを作成
+それぞれに値を記入して、usestateで更新 enter or クリックでaxiospost(data)が流れる
