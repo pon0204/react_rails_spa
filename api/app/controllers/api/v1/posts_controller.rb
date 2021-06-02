@@ -4,14 +4,14 @@ class Api::V1::PostsController < ApplicationController
     posts = Post.all
     
     render json: {
-      post: posts
+      posts: posts
     }, status: :ok
   end
 
   def show
     posts = Post.find(params[:id])
     render json: {
-      post: posts
+      posts: [posts]
     }, status: :ok
   end
 end
