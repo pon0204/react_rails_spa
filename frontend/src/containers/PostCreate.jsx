@@ -1,15 +1,23 @@
 // useRef
 
-import React, {useState,useRef,useCallback} from 'react';
-import { createPosts } from '../apis/posts';
+import React, {useState,useRef} from 'react';
+import { createPosts,fetchPosts } from '../apis/posts';
 
-export const PostForm = () => {
+
+
+// reducers
+import {
+  initialState,
+  postsActionTyps,
+  postsReducer,
+} from '../reducers/posts';
+
+
+export const PostsCreate = ({postFunc}) => {
   
   const inputTitle = useRef(null)
   const inputCaption = useRef(null)
   const inputDate = useRef(null)
-
-  const [PostData,changeText] = useState([])
   
   const handleClick = () => {
     const data = {
@@ -17,18 +25,15 @@ export const PostForm = () => {
       caption: inputCaption.current.value,
       date: inputDate.current.value,
     }
-    createPosts(data);
+    postFunc(createPosts(data));
   }
-
-
-
-
 
   return (
     <>
       {/* <p>{PostData.title}</p>
       <p>{PostData.caption}</p>
       <p>{PostData.date}</p> */}
+
       <input ref={inputTitle} type="text" />
       <input ref={inputCaption} type="text" />
       <input ref={inputDate} type="text" />
@@ -37,9 +42,6 @@ export const PostForm = () => {
     </>
   )
 }
-
-
-
 // useReducer
 
 // import React, { useReducer } from 'react';

@@ -2,14 +2,14 @@
 
 import React, { Fragment, useReducer, useEffect,useState } from 'react';
 import styled from "styled-components";
-
+import {PostsCreate} from './PostCreate'
 
 // --- ここから追加 ---
 import { Link } from "react-router-dom";
 // --- ここまで追加 ---
 
 // apis
-import { fetchPosts,createPosts } from '../apis/posts';
+import { fetchPosts,deletePosts } from '../apis/posts';
 
 // reducers
 import {
@@ -69,12 +69,26 @@ const SubText = styled.p`
 `;
 // --- ここまで追加 ---
 
-export const Posts = () => {
+export const PostsIndex = (props) => {
 
   const [state, dispatch] = useReducer(postsReducer, initialState);
 
   useEffect(() => {
-    dispatch({ type: postsActionTyps.FETCHING });
+    postDispatch()
+    }, [])
+
+    const deleteClick = (postId) => {
+      postFunc(deletePosts(postId))
+    }
+
+  const postFunc = (postFunc) => {
+  postFunc.then( () =>{
+    postDispatch()
+    })
+  }
+
+  const postDispatch = () => {
+    dispatch({ type: postsActionTyps.FETCHING })
     fetchPosts()
     .then((data) =>
     dispatch({
@@ -82,9 +96,8 @@ export const Posts = () => {
         payload: {
           posts: data.posts
         }
-      })
-      )
-    }, [])
+      }))
+  }
   
   return (
     <Fragment>
@@ -93,17 +106,36 @@ export const Posts = () => {
       <MainCoverImageWrapper>
 
       </MainCoverImageWrapper>
+      <PostsCreate 
+      postFunc={postFunc}
+      />
       <postsContentsList>
         {
           state.fetchState === REQUEST_STATE.LOADING ?
-            <Fragment>
-            </Fragment>
-          :
-            state.postsList.map((item, index) =>
+              state.postsList.map((item, index) =>
               // <Link to={`/posts/${item.id}/foods`} key={index} style={{ textDecoration: 'none' }}>
                 <postsContentWrapper>
+                  <Link to={`/posts/${item.id}`} key={index}>
                   <MainText>{item.title}</MainText>
-                  <MainText>{item.id}</MainText>
+                  <MainText>{item.caption}</MainText>
+                  <MainText>{item.date}</MainText>
+                  </Link>
+                  <button onClick={ () =>deleteClick(item.id)}>Delete</button>
+
+                </postsContentWrapper>
+              // </Link>
+            )
+          :
+              state.postsList.map((item, index) =>
+              // <Link to={`/posts/${item.id}/foods`} key={index} style={{ textDecoration: 'none' }}>
+                <postsContentWrapper>
+                  <Link to={`/posts/${item.id}`} key={index}>
+                  <MainText>{item.title}</MainText>
+                  <MainText>{item.caption}</MainText>
+                  <MainText>{item.date}</MainText>
+                  </Link>
+                  <button onClick={ () =>deleteClick(item.id)}>Delete</button>
+
                 </postsContentWrapper>
               // </Link>
             )

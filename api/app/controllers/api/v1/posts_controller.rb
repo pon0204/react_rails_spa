@@ -2,7 +2,6 @@ class Api::V1::PostsController < ApplicationController
 
   def index
     posts = Post.all
-    
     render json: {
       posts: posts
     }, status: :ok
@@ -11,7 +10,7 @@ class Api::V1::PostsController < ApplicationController
   def show
     posts = Post.find(params[:id])
     render json: {
-      posts: [posts]
+      posts: posts
     }, status: :ok
   end
 
@@ -35,7 +34,7 @@ class Api::V1::PostsController < ApplicationController
   private
 
   def post_params
-    params.permit(:title, :caption,:date)
+    params.require(:post).permit(:title, :caption,:date)
   end
 
 end
